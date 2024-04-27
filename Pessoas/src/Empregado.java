@@ -2,9 +2,9 @@ public class Empregado extends Pessoa{
 
    
     private int numeroSecao;
-    private double salarioBase; // Vencimento Base
+    protected double salarioBase; // Vencimento Base
+
     private double INSS; // Percentagem a ser retida do salario
-    private double salarioFinal = salarioBase;
 
     public Empregado(String nome, int idade, double altura, double peso, int numeroSecao, double salarioBase) {
         super(nome, idade, altura, peso);
@@ -25,11 +25,12 @@ public class Empregado extends Pessoa{
         return INSS;
     }
 
-    public double calcularSalario() {
+    public double calcularSalario(double salarioBase) {
         double INSS = defineINSS(); 
         double deducaoINSS = (salarioBase * INSS) / 100; 
-        salarioFinal = salarioBase - deducaoINSS; 
-        return salarioFinal;
+        // salarioBase -= deducaoINSS; 
+        double salarioFodase = salarioBase - deducaoINSS;
+        return salarioFodase;
     }
 
     public void exibe(){
@@ -40,6 +41,14 @@ public class Empregado extends Pessoa{
         System.out.println("Numero da Seção: " + numeroSecao);
         System.out.println("Salario Base: R$" + salarioBase);
         System.out.println("Porcentagem do INSS: " + defineINSS());
-        System.out.println("Salario Final: R$" + calcularSalario());
+        System.out.println("Salario Final: R$" + calcularSalario(salarioBase));
+    }
+
+    public double getSalarioBase() {
+        return salarioBase;
+    }
+    
+    public double getINSS() {
+        return INSS;
     }
 }
